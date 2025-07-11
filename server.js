@@ -1,8 +1,24 @@
+require('dotenv').config()
+
 const express = require('express');
-const connectDB = require('./config/db');
- const router = require('./routes')
 const path = require('path');
 const cors = require('cors');
+
+// Initialize contract service
+const { initializeContractService } = require('./services/baycContractService/baycContractService');
+const rpcUrl = process.env.INFURA_ETHEREUM_URL
+if (!rpcUrl) {
+  console.error("Error: Ethereum RPC URL not found in .env. Please set INFURA_ETHEREUM_URL.")
+  process.exit(1)
+}
+try {
+  initializeContractService(rpcUrl)
+} catch (error) {
+  console.error("Failed to initialize contract service:", error.message)
+  process.exit(1)
+}
+
+const router = require('./routes');
 const app = express();
 
 // Init Middleware
@@ -10,9 +26,6 @@ app.use(express.json());
 app.use(cors());
 
 app.use(router);
-
-
-
 
 
 ////////////////////////

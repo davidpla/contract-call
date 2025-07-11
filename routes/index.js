@@ -9,6 +9,7 @@ const profileRoute = require('./api/profile');
 const postsRoute = require('./api/posts');
 const tokensRoute = require('./api/tokens');
 const tokenPairsRoutes = require('./api/tokenPairs');
+const baycApiTestRoute = require('./api/baycApiTest');
 
 router.use('/api/history', historyRoute);
 router.use('/api/config', configRoute);
@@ -18,5 +19,6 @@ router.use('/api/profile', profileRoute);
 router.use('/api/posts', postsRoute);
 router.use('/api/tokens', tokensRoute);
 router.use('/api/token-pairs', tokenPairsRoutes);
+router.use('/api/baycApiTest', baycApiTestRoute);
 
 module.exports = router;
